@@ -1,0 +1,17 @@
+a:link {color:#00ffff;text-decoration:none;}
+a:visited {color:#00ffff;text-decoration:none;}
+a:hover {color:#ffffff;text-decoration:underline;}
+a:active {color:#ffffff;text-decoration:underline;}
+
+#title {font-family: Times New Roman; font-size:25px; color:#00ffff; text-align:center;}
+#sndtext {font-family: Tempus Sans ITC; font-size:16px; color:#00ffff; text-align:center;}
+#description{font-family: Tempus Sans ITC; font-size:16px; color:#00ffff; text-align:center;}
+#footer{font-family: Times New Roman; font-size:12px; font-weight:bold; color:#000000; text-align:center;}
+#genre{font-family: Tempus Sans ITC; font-size:16px; color:#000000; text-align:center;}
+
+hr {
+  border: 0;
+  width: 80%;
+  background-color: #00ffff;
+  height: 5px;
+}
