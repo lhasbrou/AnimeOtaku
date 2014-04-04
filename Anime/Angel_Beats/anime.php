@@ -1,5 +1,12 @@
 <html>
 <head>
+<?php
+include_once '../../includes/db_connect.php';
+include_once '../../includes/functions.php';
+
+sec_session_start();
+
+?>
 <script type="text/JavaScript">
 <!--
 function MM_swapImgRestore() { //v3.0
@@ -51,10 +58,20 @@ Angel Beats!
 <table border="3"  bordercolor="black"  bgcolor="#606060" style="opacity:0.95;" align=center  table width="1000">
 
 <tr><td width="150"; valign="top">
+<div style="height: 100px; padding-left:5px;">
+<?php if (login_check($mysqli) == true) : ?>
+        <p>Welcome <br><?php echo htmlentities($_SESSION['username']); ?>!
+		<br><a href="../../includes/logout.php">logout</a></p>
+<?php else : ?>
+		<p>Please <a href="../../login.php">login</a>
+		<br>or <a href="../../register.php">register</a></p>
+<?php endif; ?>
+</div>
 <a href="../../index.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Home','','../../IMGS/HomeDown.png',1)"><img src="../../IMGS/Home.png" name="Home" border="0"></a><br>
 <a href="../upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','../../IMGS/UpcomingDown.png',1)"><img src="../../IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
 <a href="../index.php" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','../../IMGS/ListingDown.png',1)"><img src="../../IMGS/Listing.png" name="Listing" border="0"></a><br>
 <a href="../genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','../../IMGS/GenreDown.png',1)"><img src="../../IMGS/Genre.png" name="Genre" border="0"></a><br>
+<a href="../recommendations.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Recommended','','../../IMGS/RecommendHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Recommended','','../../IMGS/RecommendDown.png',1)"><img src="../../IMGS/Recommend.png" name="Recommended" border="0"></a><br>
 <a href="../search.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','../../IMGS/SearchDown.png',1)"><img src="../../IMGS/Search.png" name="Search" border="0"></a><br>
 <a href="../../Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','../../IMGS/GamesDown.png',1)"><img src="../../IMGS/Games.png" name="Games" border="0"></a><br>
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','../../IMGS/MusicDown.png',1); MyWindow=window.open('../../Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="../../IMGS/Music.png" name="Music" border="0"></a><br>
@@ -62,12 +79,8 @@ Angel Beats!
 <br>
 
 <?php 
-include_once '../../includes/db_connect.php';
-include_once '../../includes/functions.php';
-
 $animename = 'Angel Beats!';
 get_anime_page($animename, $mysqli);
-
 ?>
 
 <center><iframe width="640" height="360" src="//www.youtube-nocookie.com/embed/xc5GCDSgWQI?rel=0" frameborder="0" allowfullscreen></iframe>

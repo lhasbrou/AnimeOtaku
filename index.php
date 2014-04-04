@@ -1,17 +1,13 @@
 <html>
 <head>
 <?php
-include_once 'includes/register.inc.php';
+include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
 sec_session_start();
 
 ?>
-<meta http-equiv="refresh" content="5;login.php">
-<script type="text/JavaScript" src="js/sha512.js"></script> 
-<script type="text/JavaScript" src="js/forms.js"></script>
 <script type="text/JavaScript">
-
 <!--
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
@@ -37,6 +33,7 @@ function MM_swapImage() { //v3.0
 }
 //-->
 </script>
+<script src="snowstorm.js"></script>
 <style>
 
 { margin: 0; padding: 0; }
@@ -51,7 +48,7 @@ background-size: cover;
 
 </style>
 <title>
-AnimeOtaku registration page 
+Welcome to AnimeOtaku! 
 </title>
 <link rel="shortcut icon" href="IMGS/favicon.ico">
 <link rel="stylesheet" href="mainformat.css">
@@ -62,24 +59,33 @@ AnimeOtaku registration page
 <table border="3"  bordercolor="black"  bgcolor="#606060" style="opacity:0.95;" align=center  table width="1000">
 
 <tr><td width="150"; valign="top">
-<div style="height: 100px; padding-left:5px;"></div>
+<div style="height: 100px; padding-left:5px;">
+<?php if (login_check($mysqli) == true) : ?>
+        <p>Welcome <br><?php echo htmlentities($_SESSION['username']); ?>!
+		<br><a href="includes/logout.php">logout</a></p>
+<?php else : ?>
+		<p>Please <a href="login.php">login</a>
+		<br>or <a href="register.php">register</a></p>
+<?php endif; ?>
+</div>
 <a href="index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Home','','IMGS/HomeHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Home','','IMGS/HomeDown.png',1)"><img src="IMGS/Home.png" name="Home" border="0"></a><br>
 <a href="Anime/upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Upcoming','','IMGS/UpcomingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','IMGS/UpcomingDown.png',1)"><img src="IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
 <a href="Anime/index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Listing','','IMGS/ListingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','IMGS/ListingDown.png',1)"><img src="IMGS/Listing.png" name="Listing" border="0"></a><br>
 <a href="Anime/genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Genre','','IMGS/GenreHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','IMGS/GenreDown.png',1)"><img src="IMGS/Genre.png" name="Genre" border="0"></a><br>
+<a href="Anime/recommendations.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Recommended','','IMGS/RecommendHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Recommended','','IMGS/RecommendDown.png',1)"><img src="IMGS/Recommend.png" name="Recommended" border="0"></a><br>
 <a href="Anime/search.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Search','','IMGS/SearchHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','IMGS/SearchDown.png',1)"><img src="IMGS/Search.png" name="Search" border="0"></a><br>
 <a href="Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Games','','IMGS/GamesHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','IMGS/GamesDown.png',1)"><img src="IMGS/Games.png" name="Games" border="0"></a><br>
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','IMGS/MusicDown.png',1); MyWindow=window.open('Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="IMGS/Music.png" name="Music" border="0"></a><br>
-</td><td width="850"; valign="top">
+</td><td width="850">
 <center>
 <br>
-<div id="title">Registration Successful!</div>
+<div id="title">Welcome to NemesisSlayer's AnimeOtakuInfo page.  Here you can find information about all your favorite animes.</div>
 <hr><br><br>
-
-<div id="sndtext">You will be redirected shortly to the login page.</div>
-
+<object width="320" height="240" id="lsplayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"><param name="movie" value="http://cdn.livestream.com/grid/LSPlayer.swf?channel=gendou_tv&amp;color=0xe7e7e7&amp;autoPlay=true&amp;mute=true&amp;iconColorOver=0x888888&amp;iconColor=0x777777"></param><param name="allowScriptAccess" value="always"></param><param name="allowFullScreen" value="true"></param><embed name="lsplayer" wmode="transparent" src="http://cdn.livestream.com/grid/LSPlayer.swf?channel=gendou_tv&amp;color=0xe7e7e7&amp;autoPlay=true&amp;mute=true&amp;iconColorOver=0x888888&amp;iconColor=0x777777" width="320" height="240" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash"></embed></object>
+<br><br><br>
 </td></tr>
 </table>
+<a href="#" onclick="snowStorm.randomizeWind();return false">Change Wind</a> | <a href="#" onclick="snowStorm.stop();return false">Stop Snowing</a><br>
 <div id="footer">Copyright @ 2014 AnimeOtaku by Logan Hasbrouck</div>
 </body>
 </html>

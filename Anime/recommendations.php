@@ -47,7 +47,7 @@ background-size: cover;
 
 </style>
 <title>
-Search by genre 
+Neme's anime recommendations
 </title>
 <link rel="shortcut icon" href="../IMGS/favicon.ico">
 <link rel="stylesheet" href="../mainformat.css">
@@ -75,21 +75,18 @@ Search by genre
 <a href="search.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Search','','../IMGS/SearchHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','../IMGS/SearchDown.png',1)"><img src="../IMGS/Search.png" name="Search" border="0"></a><br>
 <a href="../Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Games','','../IMGS/GamesHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','../IMGS/GamesDown.png',1)"><img src="../IMGS/Games.png" name="Games" border="0"></a><br>
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','../IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','../IMGS/MusicDown.png',1); MyWindow=window.open('../Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="../IMGS/Music.png" name="Music" border="0"></a><br>
-</td><td width="850">
+</td><td width="850"; valign="top">
 <br>
-<div id="title">Anime by Genre</div>
+<div id="title">NemesisSlayer's Anime Recommendations</div>
 <hr>
-<div id="genre">
 
-<?php 
-list_genres($mysqli);
-?>
 
-</div>
+
+
 <br><br><br>
 <br><br><br>
 </td></tr>
 </table>
-<div id="footer">Copyright @ 2014 AnimeOtaku by Logan Hasbrouck</b></div>
+<font style="Times New Roman" size="2" color="#000000"><b>Copyright @ 2014 AnimeOtaku by Logan Hasbrouck</b></font>
 </body>
 </html>

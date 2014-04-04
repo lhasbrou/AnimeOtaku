@@ -7,7 +7,6 @@ include_once 'includes/functions.php';
 sec_session_start();
 
 ?>
-<meta http-equiv="refresh" content="5;login.php">
 <script type="text/JavaScript" src="js/sha512.js"></script> 
 <script type="text/JavaScript" src="js/forms.js"></script>
 <script type="text/JavaScript">
@@ -67,16 +66,54 @@ AnimeOtaku registration page
 <a href="Anime/upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Upcoming','','IMGS/UpcomingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','IMGS/UpcomingDown.png',1)"><img src="IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
 <a href="Anime/index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Listing','','IMGS/ListingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','IMGS/ListingDown.png',1)"><img src="IMGS/Listing.png" name="Listing" border="0"></a><br>
 <a href="Anime/genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Genre','','IMGS/GenreHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','IMGS/GenreDown.png',1)"><img src="IMGS/Genre.png" name="Genre" border="0"></a><br>
+<a href="Anime/recommendations.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Recommended','','IMGS/RecommendHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Recommended','','IMGS/RecommendDown.png',1)"><img src="IMGS/Recommend.png" name="Recommended" border="0"></a><br>
 <a href="Anime/search.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Search','','IMGS/SearchHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','IMGS/SearchDown.png',1)"><img src="IMGS/Search.png" name="Search" border="0"></a><br>
 <a href="Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Games','','IMGS/GamesHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','IMGS/GamesDown.png',1)"><img src="IMGS/Games.png" name="Games" border="0"></a><br>
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','IMGS/MusicDown.png',1); MyWindow=window.open('Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="IMGS/Music.png" name="Music" border="0"></a><br>
 </td><td width="850"; valign="top">
 <center>
 <br>
-<div id="title">Registration Successful!</div>
+<div id="title">Registration</div>
 <hr><br><br>
 
-<div id="sndtext">You will be redirected shortly to the login page.</div>
+
+        <?php
+        if (!empty($error_msg)) {
+            echo $error_msg;
+        }
+        ?>
+        <ul>
+            <li>Usernames may contain only digits, upper and lower case letters and underscores</li>
+            <li>Emails must have a valid email format</li>
+            <li>Passwords must be at least 6 characters long</li>
+            <li>Passwords must contain
+                <ul>
+                    <li>At least one upper case letter (A..Z)</li>
+                    <li>At least one lower case letter (a..z)</li>
+                    <li>At least one number (0..9)</li>
+                </ul>
+            </li>
+            <li>Your password and confirmation must match exactly</li>
+        </ul>
+        <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>">
+            Username: <input type='text' name='username' id='username' /><br>
+            Email: <input type="text" name="email" id="email" /><br>
+            Password: <input type="password"
+                             name="password" 
+                             id="password"/><br>
+            Confirm password: <input type="password" 
+                                     name="confirmpwd" 
+                                     id="confirmpwd" /><br>
+            <input type="button" 
+                   value="Register" 
+                   onclick="return regformhash(this.form,
+                                   this.form.username,
+                                   this.form.email,
+                                   this.form.password,
+                                   this.form.confirmpwd);" /> 
+        </form>
+        <p>Return to the <a href="index.php">login page</a>.</p>
+
 
 </td></tr>
 </table>

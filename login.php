@@ -1,17 +1,22 @@
-<html>
-<head>
 <?php
-include_once 'includes/register.inc.php';
+include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
 sec_session_start();
 
+if (login_check($mysqli) == true) {
+    $logged = 'in';
+} else {
+    $logged = 'out';
+}
 ?>
-<meta http-equiv="refresh" content="5;login.php">
-<script type="text/JavaScript" src="js/sha512.js"></script> 
-<script type="text/JavaScript" src="js/forms.js"></script>
-<script type="text/JavaScript">
+<html>
+<head>
 
+<script type="text/JavaScript" src="js/sha512.js"></script> 
+<script type="text/JavaScript" src="js/forms.js"></script> 
+
+<script type="text/JavaScript">
 <!--
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
@@ -51,7 +56,7 @@ background-size: cover;
 
 </style>
 <title>
-AnimeOtaku registration page 
+AnimeOtaku login page 
 </title>
 <link rel="shortcut icon" href="IMGS/favicon.ico">
 <link rel="stylesheet" href="mainformat.css">
@@ -67,16 +72,41 @@ AnimeOtaku registration page
 <a href="Anime/upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Upcoming','','IMGS/UpcomingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','IMGS/UpcomingDown.png',1)"><img src="IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
 <a href="Anime/index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Listing','','IMGS/ListingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','IMGS/ListingDown.png',1)"><img src="IMGS/Listing.png" name="Listing" border="0"></a><br>
 <a href="Anime/genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Genre','','IMGS/GenreHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','IMGS/GenreDown.png',1)"><img src="IMGS/Genre.png" name="Genre" border="0"></a><br>
+<a href="Anime/recommendations.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Recommended','','IMGS/RecommendHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Recommended','','IMGS/RecommendDown.png',1)"><img src="IMGS/Recommend.png" name="Recommended" border="0"></a><br>
 <a href="Anime/search.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Search','','IMGS/SearchHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','IMGS/SearchDown.png',1)"><img src="IMGS/Search.png" name="Search" border="0"></a><br>
 <a href="Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Games','','IMGS/GamesHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','IMGS/GamesDown.png',1)"><img src="IMGS/Games.png" name="Games" border="0"></a><br>
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','IMGS/MusicDown.png',1); MyWindow=window.open('Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="IMGS/Music.png" name="Music" border="0"></a><br>
 </td><td width="850"; valign="top">
 <center>
 <br>
-<div id="title">Registration Successful!</div>
+<div id="title">Member login</div>
 <hr><br><br>
 
-<div id="sndtext">You will be redirected shortly to the login page.</div>
+
+<?php
+        if (isset($_GET['error'])) {
+            echo '<p class="error">Error Logging In!</p>';
+        }
+        ?> 
+		
+<?php if (login_check($mysqli) == true) : ?>
+        <p>You are already logged in.</p>
+            <p>Return to <a href="index.php">home page</a></p>
+        <?php else : ?>
+
+
+        <form action="includes/process_login.php" method="post" name="login_form"> 			
+            Email: <input type="text" name="email" />
+            Password: <input type="password" 
+                             name="password" 
+                             id="password"/>
+            <input type="button" 
+                   value="Login" 
+                   onclick="formhash(this.form, this.form.password);" /> 
+        </form>
+        <p>If you don't have a login, please <a href="register.php">register</a></p>
+<?php endif; ?>
+
 
 </td></tr>
 </table>
