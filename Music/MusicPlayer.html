@@ -1,16 +1,23 @@
 <html>
 <head>
+<?php
+include_once '../includes/db_connect.php';
+include_once '../includes/functions.php';
+
+?>
 <title>
 AnimeOtaku Music Player
 </title>
 <link rel="shortcut icon" href="IMGS/favicon.ico">
 </head>
+
 <body onload="window.resizeTo(335,385)">
 <object type="application/x-shockwave-flash" data="player_mp3_multi.swf" width="300" height="300">
     <param name="movie" value="player_mp3_multi.swf" />
     <param name="bgcolor" value="#ffffff" />
-    <param name="FlashVars" value="mp3=Arc_of_Dream.mp3%20%7C%20Black_Lotus.mp3%20%7C%20Blood_Clot.mp3%20%7C%20East%21.mp3%20%7C%20Guilty_Princess.mp3%20%7C%20Illusionary_Flowers.mp3%20%7C%20KyoSakinoze.mp3%20%7C%20Lucent_Wish.mp3%20%7C%20Lucid_Dream.mp3%20%7C%20Princess_Coronation.mp3%20%7C%20Relate.mp3%20%7C%20Sound_of_Carnation.mp3%20%7C%20Sunlit_Daydreaming.mp3%20%7C%20Tsuiso_Lyrical_Song.mp3%20%7C%20White_Wish.mp3&amp;width=300&amp;height=300&amp;autoplay=1&amp;shuffle=1&amp;showvolume=1&amp;skin=playerbg.jpeg&amp;sliderovercolor=00ffff&amp;buttonovercolor=ff0000&amp;textcolor=000000&amp;playlistalpha=100&amp;currentmp3color=00ffff&amp;scrollbarcolor=000000&amp;scrollbarovercolor=00ffff"/>
+    <param name="FlashVars" value="mp3=<?php get_music_files();?>&amp;width=300&amp;height=300&amp;autoplay=1&amp;shuffle=1&amp;showvolume=1&amp;skin=playerbg.jpeg&amp;sliderovercolor=00ffff&amp;buttonovercolor=ff0000&amp;textcolor=000000&amp;playlistalpha=100&amp;currentmp3color=00ffff&amp;scrollbarcolor=000000&amp;scrollbarovercolor=00ffff"/>
 </object>
+
 <!--Copyright @ 2014 AnimeOtaku by Logan Hasbrouck-->
 </body>
 </html>

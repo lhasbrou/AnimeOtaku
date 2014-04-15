@@ -1,6 +1,22 @@
 <?php
-include_once 'includes/db_connect.php';
+	if(isset($_POST["recaptcha_challenge_field"]))
+	{
+  require_once('recaptchalib.php');
+  $privatekey = "XX";
+  $resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+
+  if (!$resp->is_valid) {
+    // What happens when the CAPTCHA was entered incorrectly
+    $errmsg="<font color=\"#ff0000\">The captcha you entered was incorrect.  Please try again.</font>";
+  } else {
+		include_once 'includes/process_login.php';
+  }
+}
 include_once 'includes/functions.php';
+include_once 'includes/db_connect.php';
 
 sec_session_start();
 
@@ -87,22 +103,32 @@ AnimeOtaku login page
         if (isset($_GET['error'])) {
             echo '<p class="error">Error Logging In!</p>';
         }
-        ?> 
-		
+			if(isset($errmsg)) {
+				echo($errmsg);
+			}
+			?>
 <?php if (login_check($mysqli) == true) : ?>
-        <p>You are already logged in.</p>
+        <p>You are currently logged in.</p>
             <p>Return to <a href="index.php">home page</a></p>
         <?php else : ?>
 
 
-        <form action="includes/process_login.php" method="post" name="login_form"> 			
+        <form action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>" method="post" name="login_form"> 			
             Email: <input type="text" name="email" />
             Password: <input type="password" 
                              name="password" 
                              id="password"/>
+							 <hr>
+							 <br>
+							<?php
+								require_once('recaptchalib.php');
+								$publickey = "XX"; // you got this from the signup page
+								echo recaptcha_get_html($publickey);
+							?>
+			<br>
             <input type="button" 
                    value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
+                   onclick="return formhash(this.form, this.form.password);" /> 
         </form>
         <p>If you don't have a login, please <a href="register.php">register</a></p>
 <?php endif; ?>

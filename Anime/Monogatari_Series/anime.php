@@ -7,6 +7,12 @@ include_once '../../includes/functions.php';
 sec_session_start();
 
 ?>
+<script src='../../StarRating/jquery.js' type="text/javascript"></script>
+<script src='../../StarRating/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+<script src='../../StarRating/jquery.rating.js' type="text/javascript" language="javascript"></script>
+<link href='../../StarRating/jquery.rating.css' type="text/css" rel="stylesheet"/>
+<script src='../../StarRating/jquery-ui.min.js' type="text/javascript"></script>
+
 <script type="text/JavaScript">
 <!--
 function MM_swapImgRestore() { //v3.0
@@ -47,10 +53,10 @@ background-size: cover;
 
 </style>
 <title>
-Welcome to AnimeOtaku! 
+Monogatari Series
 </title>
 <link rel="shortcut icon" href="../../IMGS/favicon.ico">
-<link rel="stylesheet" href="../../mainformat.css">
+<!--<link rel="stylesheet" href="../../mainformat.css">-->
 </head>
 <body>
 <center>
@@ -67,26 +73,72 @@ Welcome to AnimeOtaku!
 		<br>or <a href="../../register.php">register</a></p>
 <?php endif; ?>
 </div>
-<a href="../../index.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Home','','../../IMGS/HomeDown.png',1)"><img src="../../IMGS/Home.png" name="Home" border="0"></a><br>
-<a href="../upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','../../IMGS/UpcomingDown.png',1)"><img src="../../IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
-<a href="../index.php" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','../../IMGS/ListingDown.png',1)"><img src="../../IMGS/Listing.png" name="Listing" border="0"></a><br>
-<a href="../genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','../../IMGS/GenreDown.png',1)"><img src="../../IMGS/Genre.png" name="Genre" border="0"></a><br>
+<a href="../../index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Home','','../../IMGS/HomeHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Home','','../../IMGS/HomeDown.png',1)"><img src="../../IMGS/Home.png" name="Home" border="0"></a><br>
+<a href="../upcoming.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Upcoming','','../../IMGS/UpcomingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Upcoming','','../../IMGS/UpcomingDown.png',1)"><img src="../../IMGS/Upcoming.png" name="Upcoming" border="0"></a><br>
+<a href="../index.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Listing','','../../IMGS/ListingHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Listing','','../../IMGS/ListingDown.png',1)"><img src="../../IMGS/Listing.png" name="Listing" border="0"></a><br>
+<a href="../genrelist.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Genre','','../../IMGS/GenreHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Genre','','../../IMGS/GenreDown.png',1)"><img src="../../IMGS/Genre.png" name="Genre" border="0"></a><br>
 <a href="../recommendations.php" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Recommended','','../../IMGS/RecommendHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Recommended','','../../IMGS/RecommendDown.png',1)"><img src="../../IMGS/Recommend.png" name="Recommended" border="0"></a><br>
-<a href="../search.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','../../IMGS/SearchDown.png',1)"><img src="../../IMGS/Search.png" name="Search" border="0"></a><br>
-<a href="../../Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','../../IMGS/GamesDown.png',1)"><img src="../../IMGS/Games.png" name="Games" border="0"></a><br>
-<a href="#" onMouseUp="MM_swapImgRestore()" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','../../IMGS/MusicDown.png',1); MyWindow=window.open('../../Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="../../IMGS/Music.png" name="Music" border="0"></a><br>
-</font>
+<a href="../search.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Search','','../../IMGS/SearchHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Search','','../../IMGS/SearchDown.png',1)"><img src="../../IMGS/Search.png" name="Search" border="0"></a><br>
+<a href="../../Games/index.html" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Games','','../../IMGS/GamesHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Games','','../../IMGS/GamesDown.png',1)"><img src="../../IMGS/Games.png" name="Games" border="0"></a><br>
+<a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','../../IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','../../IMGS/MusicDown.png',1); MyWindow=window.open('../../Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="../../IMGS/Music.png" name="Music" border="0"></a><br>
 </td><td width="850">
 <br>
-
-<?php 
+<?php
 $animename = 'Bakemonogatari/Nisemonogatari/Nekomonogatari';
+?>
+<div class="starRate" style="padding-left:20px; position: absolute;">
+<div>Currently rated: <br><?php get_star_rating($animename, $mysqli) ?></div>
+</div>
+<?php 
 get_anime_page($animename, $mysqli);
 ?>
-
 <center><iframe width="640" height="360" src="//www.youtube-nocookie.com/embed/lXX7dRULFaE?rel=0" frameborder="0" allowfullscreen></iframe>
 <br><br><br>
 <br><br><br>
+<hr>
+<script>
+$(function(){
+ $('.hover-star').rating({
+  focus: function(value, link){
+    // 'this' is the hidden form element holding the current value
+    // 'value' is the value selected
+    // 'element' points to the link element that received the click.
+    var tip = $('#hover-test');
+    tip[0].data = tip[0].data || tip.html();
+    tip.html(link.title || 'value: '+value);
+  },
+  blur: function(value, link){
+    var tip = $('#hover-test');
+    $('#hover-test').html(tip[0].data || '');
+  }
+ });
+});
+</script>
+
+<div id="review_section">
+<?php if (login_check($mysqli) == true) : ?>
+<form method="post" action="../../includes/process_review.php" name="review_form">
+<div style="font-family: Tempus Sans ITC; width: 500px; vertical-align: middle;">
+<?php get_individual_star_rating($animename, $mysqli); ?>
+<span id="hover-test" style="margin:0 0 0 20px;">&nbsp;</span>
+</div>
+<input type="hidden" name="returnURL" value="<?php echo($_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]) ?>">
+<input type="hidden" name="animename" value="<?php echo($animename) ?>">
+<textarea name="review" cols="75" rows="7">
+<?php 
+get_review($animename, $mysqli);
+?>
+</textarea><br>
+<input type="submit" value="Submit" />
+</form>
+<?php else : ?>
+<div>You need to be logged in to rate.</div>
+<?php endif; ?>
+<hr>
+<?php
+get_all_reviews($animename, $mysqli);
+?>
+</div>
 </td></tr>
 </table>
 <div id="footer">Copyright @ 2014 AnimeOtaku by Logan Hasbrouck</div>

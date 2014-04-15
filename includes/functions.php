@@ -369,3 +369,218 @@ function search_database($searchvalue, $mysqli) {
 		}
 	}
 }
+
+function get_star_rating($animename, $mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT TRUNCATE((SUM(rating)/COUNT(rating)), 2) FROM ratings WHERE ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($ratings);
+	$stmt->fetch();
+	
+	if(is_null($ratings)) {
+	$ratings=0;
+	}
+	$ratings2=round($ratings*4);
+	for($x=1; $x<=20; $x++)
+		{
+		if($x == $ratings2)
+			{
+			echo("<input class=\"star {split:4}\" type=\"radio\" name=\"rating-segments\" value=\"" . $x . "\" disabled=\"disabled\" checked=\"checked\"/>");
+			}
+		else 
+			{
+			echo("<input class=\"star {split:4}\" type=\"radio\" name=\"rating-segments\" value=\"" . $x . "\" disabled=\"disabled\"/>");
+			}
+		}
+	}
+}
+
+function get_individual_star_rating($animename, $mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT rating FROM ratings WHERE id=" . $_SESSION['user_id'] . " AND ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($ratingz);
+	$stmt->fetch();
+	
+	if(is_null($ratingz)) {
+	$ratingz=0;
+	}
+	for($x=1; $x<=5; $x++)
+		{
+		echo("<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"");
+		if($x == 1)
+			{
+			echo("1\" title=\"Terrible\"");
+			if($ratingz == $x)
+				{
+				echo(" checked=\"checked\"/>");
+				}
+			else
+				{
+				echo("/>");
+				}
+			}
+		else if($x == 2)
+			{
+			echo("2\" title=\"Poor\"");
+			if($ratingz == $x)
+				{
+				echo(" checked=\"checked\"/>");
+				}
+			else
+				{
+				echo("/>");
+				}
+			}
+		else if($x == 3)
+			{
+			echo("3\" title=\"Ok\"");
+			if($ratingz == $x)
+				{
+				echo(" checked=\"checked\"/>");
+				}
+			else
+				{
+				echo("/>");
+				}
+			}
+		else if($x == 4)
+			{
+			echo("4\" title=\"Good\"");
+			if($ratingz == $x)
+				{
+				echo(" checked=\"checked\"/>");
+				}
+			else
+				{
+				echo("/>");
+				}
+			}
+		else if($x == 5)
+			{
+			echo("5\" title=\"Awesome\"");
+			if($ratingz == $x)
+				{
+				echo(" checked=\"checked\"/>");
+				}
+			else
+				{
+				echo("/>");
+				}
+			}
+		else 
+			{
+			echo("<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"1\" title=\"Terrible\"/>
+<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"2\" title=\"Poor\"/>
+<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"3\" title=\"OK\"/>
+<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"4\" title=\"Good\"/>
+<input class=\"hover-star\" type=\"radio\" name=\"Star_Ratingz\" value=\"5\" title=\"Awesome\"/>");
+			}
+		}
+	}
+}
+
+function get_review($animename, $mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT review FROM ratings WHERE id=" . $_SESSION['user_id'] . " AND ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($review);
+	$stmt->fetch();
+	
+	if(is_null($review)) {
+	echo("Type review here.");
+	}
+	else {
+	
+	echo($review);
+		}
+	}
+}
+
+function set_review($animename, $mysqli, $review, $rating) {
+	if($rating == 0)
+	{
+	$rating = NULL;
+	}
+	if ($stmt = $mysqli->prepare("SELECT id FROM ratings WHERE id=" . $_SESSION['user_id'] . " AND ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($check);
+	$stmt->fetch();
+	if(empty($check)) {
+		if ($stmt = $mysqli->prepare("INSERT INTO ratings (id, ANIME_ID, review, rating) VALUES (" . $_SESSION['user_id'] . ", (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "'), '" . $review . "', " . $rating . ")")) {
+		$stmt->execute();
+		}
+	}
+	else {
+	if ($stmt = $mysqli->prepare("UPDATE ratings SET review='" . $review . "', rating=" . $rating . " WHERE id=" . $_SESSION['user_id'] . " AND ANIME_ID=(SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+		$stmt->execute();
+			}
+		}
+	}
+}
+
+function get_all_reviews($animename, $mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT username, rating, review FROM ratings r JOIN members m ON r.id = m.id WHERE r.ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($name, $rating, $review);
+	$counterz=1;
+	while($stmt->fetch()) {
+		echo("<div id=\"review\"><div id=\"reviewname\"><b>" . $name . "</b><br>");
+		if(is_null($rating)) {
+		$rating=0;
+		}
+		for($x=1; $x<=5; $x++)
+		{
+			if($x == $rating)
+				{
+				echo("<input class=\"hover-star\" type=\"radio\" name=\"individual-rating" . $counterz . "\" value=\"" . $x . "\" disabled=\"disabled\" checked=\"checked\"/>");
+				}
+			else 
+				{
+				echo("<input class=\"hover-star\" type=\"radio\" name=\"individual-rating" . $counterz . "\" value=\"" . $x . "\" disabled=\"disabled\"/>");
+				}
+		}
+		echo("</div><div id=\"reviewcontent\">" . $review . "<br>&nbsp;</div></div>");
+		$counterz++;
+		}
+	}
+}
+
+function get_music_files() {
+	$pathz = "";
+	$music = glob($pathz . "*.mp3");
+	echo(count($music));
+	for($x=0; $x<=count($music)-1; $x++) 
+		{
+		if($x == 0)
+			{
+			echo($music[0]);
+			}
+		else
+			{
+			echo("%20%7C%20" . $music[$x]);
+			}
+		}
+	}
+
+function get_starter_recommendations($mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE starter = 1")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($name, $url, $summary);
+	while($stmt->fetch()) {
+	echo("<div id=\"recommendation\"><a href=\"" . $url . "\">" . $name . "</a></div><div id=\"recommendation\">" . $summary . "</div><br>");
+	}
+}
+
+function get_nonstarter_recommendations($mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE starter = 0")) {
+	$stmt->execute();
+    $stmt->store_result();
+	$stmt->bind_result($name, $url, $summary);
+	while($stmt->fetch()) {
+	echo("<div id=\"recommendation\"><a href=\"" . $url . "\">" . $name . "</a></div><div id=\"recommendation\">" . $summary . "</div><br>");
+	}
+}

@@ -1,7 +1,22 @@
 <html>
 <head>
 <?php
-include_once 'includes/register.inc.php';
+	if(isset($_POST["recaptcha_challenge_field"]))
+	{
+  require_once('recaptchalib.php');
+  $privatekey = "XX";
+  $resp = recaptcha_check_answer ($privatekey,
+                                $_SERVER["REMOTE_ADDR"],
+                                $_POST["recaptcha_challenge_field"],
+                                $_POST["recaptcha_response_field"]);
+
+  if (!$resp->is_valid) {
+    // What happens when the CAPTCHA was entered incorrectly
+    $errmsg="<font color=\"#ff0000\">The captcha you entered was incorrect.  Please try again.</font>";
+  } else {
+		include_once 'includes/register.inc.php';
+  }
+}
 include_once 'includes/functions.php';
 
 sec_session_start();
@@ -76,11 +91,13 @@ AnimeOtaku registration page
 <div id="title">Registration</div>
 <hr><br><br>
 
-
-        <?php
-        if (!empty($error_msg)) {
-            echo $error_msg;
-        }
+		<?php
+			if(isset($errmsg)) {
+				echo($errmsg);
+			}
+			if (!empty($error_msg)) {
+				echo $error_msg;
+			}
         ?>
         <ul>
             <li>Usernames may contain only digits, upper and lower case letters and underscores</li>
@@ -95,6 +112,7 @@ AnimeOtaku registration page
             </li>
             <li>Your password and confirmation must match exactly</li>
         </ul>
+		
         <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>">
             Username: <input type='text' name='username' id='username' /><br>
             Email: <input type="text" name="email" id="email" /><br>
@@ -104,6 +122,11 @@ AnimeOtaku registration page
             Confirm password: <input type="password" 
                                      name="confirmpwd" 
                                      id="confirmpwd" /><br>
+									 <?php
+									    require_once('recaptchalib.php');
+										$publickey = "XX"; // you got this from the signup page
+										echo recaptcha_get_html($publickey);
+									 ?>
             <input type="button" 
                    value="Register" 
                    onclick="return regformhash(this.form,
@@ -112,7 +135,7 @@ AnimeOtaku registration page
                                    this.form.password,
                                    this.form.confirmpwd);" /> 
         </form>
-        <p>Return to the <a href="index.php">login page</a>.</p>
+        <p>Return to the <a href="login.php">login page</a>.</p>
 
 
 </td></tr>
