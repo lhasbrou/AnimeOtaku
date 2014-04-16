@@ -79,9 +79,24 @@ Neme's anime recommendations
 <br>
 <div id="title">NemesisSlayer's Anime Recommendations</div>
 <hr>
-
-
-
+<br>
+<center>
+<div style="width:720px;">
+<font face="Tempus Sans ITC" color="#00ffff">
+If you have never watched anime or have only watched a few animes, here is a list of animes that I recommend for starters.  If you would like to see my personal favorites, <a href="#nemesfavs">click here.</a>
+</font>
+</div>
+<br>
+<?php get_starter_recommendations($mysqli); ?>
+<br><br><br>
+<div style="width:720px;">
+<font face="Tempus Sans ITC" color="#00ffff">
+<span id="nemesfavs">Here is a list of my personal favourite animes of the only 150 or so that I have seen thus far.</span>
+</font>
+</div>
+<br>
+<?php get_favorite_recommendations($mysqli); ?>
+</font>
 
 <br><br><br>
 <br><br><br>

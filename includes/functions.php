@@ -502,6 +502,10 @@ function set_review($animename, $mysqli, $review, $rating) {
 	{
 	$rating = NULL;
 	}
+	if($review == "Type review here.")
+	{
+	$review = NULL;
+	}
 	if ($stmt = $mysqli->prepare("SELECT id FROM ratings WHERE id=" . $_SESSION['user_id'] . " AND ANIME_ID = (SELECT ANIME_ID FROM ANIMEINFO WHERE ANIME_NAME ='" . $animename . "')")) {
 	$stmt->execute();
     $stmt->store_result();
@@ -566,21 +570,23 @@ function get_music_files() {
 	}
 
 function get_starter_recommendations($mysqli) {
-	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE starter = 1")) {
+	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE starter = 1 ORDER BY ANIME_NAME")) {
 	$stmt->execute();
     $stmt->store_result();
 	$stmt->bind_result($name, $url, $summary);
 	while($stmt->fetch()) {
 	echo("<div id=\"recommendation\"><a href=\"" . $url . "\">" . $name . "</a></div><div id=\"recommendation\">" . $summary . "</div><br>");
+		}
 	}
 }
 
-function get_nonstarter_recommendations($mysqli) {
-	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE starter = 0")) {
+function get_favorite_recommendations($mysqli) {
+	if ($stmt = $mysqli->prepare("SELECT ANIME_NAME, ANIME_URL, summary FROM ANIMEINFO a JOIN recommendations r ON a.ANIME_ID = r.ANIME_ID WHERE favorites = 1 ORDER BY ANIME_NAME")) {
 	$stmt->execute();
     $stmt->store_result();
 	$stmt->bind_result($name, $url, $summary);
 	while($stmt->fetch()) {
 	echo("<div id=\"recommendation\"><a href=\"" . $url . "\">" . $name . "</a></div><div id=\"recommendation\">" . $summary . "</div><br>");
+		}
 	}
 }
