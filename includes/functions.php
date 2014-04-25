@@ -243,6 +243,7 @@ function anime_a_to_z($mysqli) {
 }
 
 function list_genres($mysqli) {
+	echo("<table align=center><tr><td>");
 	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Action%'")) {
 		$stmt->execute();
         $stmt->store_result();
@@ -253,6 +254,16 @@ function list_genres($mysqli) {
 		}
 	}
 	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Adventure%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Adventure\">Adventure</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
 	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Comedy%'")) {
 		$stmt->execute();
         $stmt->store_result();
@@ -260,6 +271,26 @@ function list_genres($mysqli) {
 		$stmt->bind_result($GENREZ);
             while ($stmt->fetch()) {
                 echo("<a class=\"linkz\" href=\"genresearch.php?this=Comedy\">Comedy</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Demons%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Demons\">Demons</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Drama%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Drama\">Drama</a>[" . $GENREZ . "]<br>");
 		}
 	}
 	
@@ -282,7 +313,7 @@ function list_genres($mysqli) {
                 echo("<a class=\"linkz\" href=\"genresearch.php?this=Fantasy\">Fantasy</a>[" . $GENREZ . "]<br>");
 		}
 	}
-	
+	echo("</td><td>");
 	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Harem%'")) {
 		$stmt->execute();
         $stmt->store_result();
@@ -300,6 +331,96 @@ function list_genres($mysqli) {
 		$stmt->bind_result($GENREZ);
             while ($stmt->fetch()) {
                 echo("<a class=\"linkz\" href=\"genresearch.php?this=Horror\">Horror</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Magic%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Magic\">Magic</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Mahou Shoujo%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Mahou%20Shoujo\">Mahou Shoujo</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Mecha%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Mecha\">Mecha</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Mystery%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Mystery\">Mystery</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Parody%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Parody\">Parody</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	echo("</td><td>");
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Psychological%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Psychological\">Psychological</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Romance%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Romance\">Romance</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%School Life%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=School%20Life\">School Life</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Science Fiction%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Science%20Fiction\">Science Fiction</a>[" . $GENREZ . "]<br>");
 		}
 	}
 	
@@ -323,6 +444,46 @@ function list_genres($mysqli) {
 		}
 	}
 	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Slapstick%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Slapstick\">Slapstick</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	echo("</td><td valign=\"top\">");
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Slice of Life%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Slice%20of%20Life\">Slice of Life</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Supernatural%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Supernatural\">Supernatural</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Thriller%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Thriller\">Thriller</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	
 	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Tragedy%'")) {
 		$stmt->execute();
         $stmt->store_result();
@@ -332,6 +493,17 @@ function list_genres($mysqli) {
                 echo("<a class=\"linkz\" href=\"genresearch.php?this=Tragedy\">Tragedy</a>[" . $GENREZ . "]<br>");
 		}
 	}
+	
+	if ($stmt = $mysqli->prepare("SELECT COUNT(GENRE) FROM ANIMEINFO WHERE GENRE LIKE '%Vampire%'")) {
+		$stmt->execute();
+        $stmt->store_result();
+		
+		$stmt->bind_result($GENREZ);
+            while ($stmt->fetch()) {
+                echo("<a class=\"linkz\" href=\"genresearch.php?this=Vampire\">Vampire</a>[" . $GENREZ . "]<br>");
+		}
+	}
+	echo("</td></tr></table>");
 }
 
 function list_genre_results($thiz, $mysqli) {

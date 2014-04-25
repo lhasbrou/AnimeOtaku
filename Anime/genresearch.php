@@ -77,7 +77,7 @@ Anime genre results
 <a href="#" onMouseUp="MM_swapImgRestore()" onMouseOver="MM_swapImage('Music','','../IMGS/MusicHover.png',1)" onMouseOut="MM_swapImgRestore()" onMouseDown="MM_swapImage('Music','','../IMGS/MusicDown.png',1); MyWindow=window.open('../Music/MusicPlayer.html','MyWindow',width=300,height=300);"><img src="../IMGS/Music.png" name="Music" border="0"></a><br>
 </td><td width="850"; valign="top">
 <br>
-<div id="title">Anime Listing A-Z</div>
+<div id="title">Genre Results</div>
 <hr>
 <div id="genre">
 
